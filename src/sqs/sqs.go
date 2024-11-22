@@ -10,8 +10,6 @@ import (
 	sqs "github.com/aws/aws-sdk-go/service/sqs"
 )
 
-const SQS_URL = "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/tel-bot-queue"
-
 func SendMessage(message string) {
 
 	sess, err := session.NewSession(&aws.Config{
@@ -27,7 +25,7 @@ func SendMessage(message string) {
 	for {
 		result, err := svc.SendMessage(&sqs.SendMessageInput{
 			MessageBody: aws.String(message),
-			QueueUrl:    aws.String(SQS_URL),
+			QueueUrl:    aws.String(os.Getenv("SQS_URL")),
 		})
 		if err != nil {
 			log.Fatalf("Erro ao enviar mensagem: %v", err)
