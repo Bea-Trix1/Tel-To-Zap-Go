@@ -2,6 +2,7 @@ package sqs
 
 import (
 	"log"
+	"os"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -14,7 +15,7 @@ const SQS_URL = "http://sqs.us-east-1.localhost.localstack.cloud:4566/0000000000
 func SendMessage(message string) {
 
 	sess, err := session.NewSession(&aws.Config{
-		Region:   aws.String("us-east-1"),
+		Region:   aws.String(os.Getenv("AWS_REGION")),
 		Endpoint: aws.String("http://localhost:4566"),
 	})
 	if err != nil {
