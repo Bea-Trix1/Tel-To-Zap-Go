@@ -4,6 +4,10 @@ Tel-To-Zap-Go é uma aplicação que integra um bot do Telegram com uma fila SQS
 
 O Consumer dessas mensagens vai ser outro serviço Tel-To-Zap-Java, onde ele irá pegar essas mensagens e enviar para um grupo ou mensagem privada no Whatsapp.
 
+# Token do Bot
+
+Para integrar com o bot do telegram, você deve utilizar o @BotFather https://t.me/BotFather, para criar um novo bot. Pegue o TOKEN gerado, e passe em suas variaveis.
+
 # SQS COM LOCALSTACK
 
 ### Passos para Configuração e Execução
@@ -11,7 +15,7 @@ O Consumer dessas mensagens vai ser outro serviço Tel-To-Zap-Java, onde ele ir�
 1. **Inicie o LocalStack**: Certifique-se de que o LocalStack está em execução. Você pode usar o Docker. Execute o seguinte comando no terminal:
 
     ```sh
-    docker run --rm -it -p 4566:4566 -p 4571:4571 localstack/localstack
+    docker run --rm -it -d -p 4566:4566 localstack/localstack start    
     ```
 
 2. **Crie a fila SQS no LocalStack**: Use o AWS CLI para criar uma fila SQS no LocalStack. Execute o seguinte comando no terminal:
