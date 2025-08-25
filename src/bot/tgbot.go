@@ -31,7 +31,9 @@ func StartBot() {
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			log.Print("Enviando mensagem para fila sqs")
-			sqs.SendMessage(update.Message.Text)
+			jsonMessage := `{"from":"produtor-go","to":"+55` + os.Getenv("SEU_NUMERO") + `","text":"` + update.Message.Text + `"}`
+
+			sqs.SendMessage(jsonMessage)
 		}
 	}
 

@@ -7,12 +7,9 @@ import (
 )
 
 func main() {
-	envConfig, err := config.LoadFromEnv()
+	_, err := config.LoadFromEnv()
 	if err != nil {
 		log.Fatalf("Erro ao carregar .env config: %v", err)
-	}
-	if err := envConfig.ValidateWithDefaults(); err != nil {
-		log.Fatalf("Erro ao validar configuração: %v", err)
 	}
 
 	log.Printf("Bot inicializado!")

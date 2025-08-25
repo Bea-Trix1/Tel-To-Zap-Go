@@ -3,7 +3,6 @@ package sqs
 import (
 	"log"
 	"os"
-	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -22,18 +21,14 @@ func SendMessage(message string) {
 
 	svc := sqs.New(sess)
 
-	for {
-		result, err := svc.SendMessage(&sqs.SendMessageInput{
-			MessageBody: aws.String(message),
-			QueueUrl:    aws.String(os.Getenv("SQS_URL")),
-		})
-		if err != nil {
-			log.Fatalf("Erro ao enviar mensagem: %v", err)
-		}
-
-		log.Printf("Mensagem enviada com sucesso: %v", result)
-
-		time.Sleep(10 * time.Second)
+	result, err := svc.SendMessage(&sqs.SendMessageInput{
+		MessageBody: aws.String(message),
+		QueueUrl:    aws.String(os.Getenv("SQS_URL")),
+	})
+	if err != nil {
+		log.Fatalf("Erro ao enviar mensagem: %v", err)
 	}
+
+	log.Printf("Mensagem enviada com sucesso: %v", result)
 
 }
